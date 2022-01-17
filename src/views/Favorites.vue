@@ -5,20 +5,36 @@
         Favorites
       </button>
     </div>
+    
     <div class="favorites">
-      <Card v-for="item in favorites" :key="item.id" :video="item"></Card>
+      <h2>Favorilere eklediğiniz video sayısı: {{favoriteCount}}</h2>
+      <Card v-for="item in favoriteVideos" :key="item.id" :video="item"></Card>
     </div>
   </div>
 </template>
 
 <script>
 import Card from "@/components/Favorites.vue";
+import {mapGetters,mapState} from "vuex";
 
 export default {
   name: "Favorites",
   props: ["favorites"],
   components: {
     Card,
+  },
+  methods: {
+    navigateToFavoritePage() {
+      this.$router.push({ name: "Favorites", params: { userid: "bootcamp" } });
+    },
+  },
+  computed: {
+    ...mapGetters({
+      favoriteCount: "getFavoriteCount",
+    }),
+    ...mapState([
+      "favoriteVideos",
+    ])
   },
 };
 </script>
@@ -36,5 +52,9 @@ export default {
   height: 70px;
   background-color: red;
   display: flex;
+}
+h2 {
+  padding-top: 20px;
+  text-align: center;
 }
 </style>

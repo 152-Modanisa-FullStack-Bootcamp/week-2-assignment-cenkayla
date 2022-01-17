@@ -56,8 +56,8 @@ export default {
       this.$router.push({ path: "watch", query: { id: this.video.id } });
     },
     addFavorite() {
-      this.$emit("add-favorite", this.video);
       this.favorited = !this.favorited;
+      this.$store.dispatch("favoriteStatusChanged",this.video)
     },
   },
 };

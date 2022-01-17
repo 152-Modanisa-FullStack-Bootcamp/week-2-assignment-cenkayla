@@ -36,7 +36,6 @@ export default {
   methods: {
     addFavorite(video) {
       let index = this.favorites.findIndex((item) => item.id === video.id);
-      console.log(index);
       if (index === -1) {
         this.favorites.push(video);
       } else {
